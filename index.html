@@ -1,581 +1,255 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GBTV</title>
-    <link rel="icon" href="logo.png" type="image/x-icon">
+    <title>Gour Bongo TV | Digital News Portal</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <!-- Headings -->
-    <div class="header">
-        <img id="logo" src="logo.png" alt="GBS logo">
-        <div id="head_label">
-            <div class="hlbl"><label id="hlb" for="">Gour Bongo TV</label></div>
-            <div class="dtbar">
-                <label class="dtdata" id="day" for="">day</label>
-                <label class="dtdata" id="date" for="">feb</label>
-                <label class="dtdata" for="" id="time">10:45 AM</label>
-            </div>
-        </div>
-        <div class="social">
-            <div id="tvimg"><img class="soc" id="yt" onclick="visityt()" src="yttv.png" alt="Youtube"><br></div>
-            <label id="tv" for="">Visit</label>
-        </div>
-    </div>
-    <!-- Navigation Menu and Search Bar -->
-    <div class="navigations">
-        <div class="menu"><img onclick="slider()" id="menu" src="menu.jpg" alt="menu"></div>
-        <div class="mainnav">
-            <ul>
-                <li style="padding-left: auto;"><a href="#"><label>নদীয়া</label></a></li>
-                <li><a href="#"><label>রাজ্য</label></a></li>
-                <li><a href="#"><label>দেশ</label></a></li>
-                <li><a href="#"><label>বিশ্ব</label></a></li>
-                <li id="hidden_li" onclick="slider()"><label>More</label></li>
-                <li class="hli"><a href="#"><label>খেলা</label></a></li>
-                <li class="hli"><a href="#"><label>বিনোদন</label></a></li>
-                <li class="hli"><a href="#"><label>স্বাস্থ্য</label></a></li>
-                <li style="padding-right: auto;" class="hli"><a href="#"><label>প্রযুক্তি</label></a></li>
-            </ul>
-        </div>
-        <div class="search"><img id="search" src="search.png" alt="search"></div>
-    </div>
-    <div class="marq">
-        <label id="ln" for="">Latest ||</label>
-        <marquee id="lnm" behavior="scroll" direction="left">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus aperiam eveniet, mollitia voluptatibus ut at blanditiis sequi, minima aliquam natus quibusdam eos odit doloremque distinctio.</marquee>
-    </div>
 
-    <!-- Main body -->
-    <div class="body">
-        <div class="sidebar">
-            <ul class="sidebar-menu">
-                <li><a href="#"><label>এই মুহুর্তে</label></a></li>
-                <li><a href="#"><label>নদীয়া</label></a></li>
-                <li><a href="#"><label>রাজ্য</label></a></li>
-                <li><a href="#"><label>দেশ</label></a></li>
-                <li><a href="#"><label>বিশ্ব</label></a></li>
-                <li><a href="#"><label>More</label></a></li>
-                <li><a href="#"><label>খেলা</label></a></li>
-                <li><a href="#"><label>বিনোদন</label></a></li>
-                <li><a href="#"><label>স্বাস্থ্য</label></a></li>
-                <li><a href="#"><label>প্রযুক্তি</label></a></li>
-                <li><a href="#"><label>About Us</label></a></li>
-                <li><a href="#"><label>Contact</label></a></li>
-            </ul>
-        </div>
+    <!-- Header -->
+    <header>
+        <div class="container nav-wrapper">
+            <!-- Tools: Clock & Live TV -->
+            <div class="header-tools">
+                <a href="#" class="logo">
+                    <img src="logo.png" alt="GBTV Logo">
+                    <span>GourBongoTV</span>
+                </a>
 
+            </div>
 
+            <!-- Desktop Nav -->
+            <nav class="main-nav">
+                <ul id="nav-list">
+                    <li><a href="#" class="active" data-cat="all">Home</a></li>
+                    <li><a href="#" data-cat="Nodiya">নদীয়া</a></li>
+                    <li><a href="#" data-cat="Rajya">রাজ্য</a></li>
+                    <li><a href="#" data-cat="Desh">দেশ</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">More <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-content">
+                            <li><a href="#" data-cat="Biswa">বিশ্ব</a></li>
+                            <li><a href="#" data-cat="Khela">খেলা</a></li>
+                            <li><a href="#" data-cat="Binodon">বিনোদন</a></li>
+                            <li><a href="#" data-cat="Swasthya">স্বাস্থ্য</a></li>
+                            <li><a href="#" data-cat="Projukti">প্রযুক্তি</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#" data-cat="about">About Us</a></li>
+                    <li><a href="#" data-cat="contact">Contact</a></li>
+                </ul>
+            </nav>
 
+            <div style="display:flex; align-items:center; gap:20px;">
+                <!-- Live TV Button -->
+                <a href="https://www.youtube.com/@gourbongotv" target="_blank" class="live-tv-btn">
+                    <i class="fas fa-circle"></i> Live TV
+                </a>
 
-    <!-- Main Body -->
-    <div class="group_title">
-        এই মুহুর্তে
-    </div>
-    <div class="main_wrapper">
-        <div class="card">
-            <div class="card_img">
-                <img src="https://picsum.photos/id/234/1920/1080" alt="">
-            </div>
-            <div class="card_title">
-                <h4>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt explicabo velit nam facere illo obcaecati.
-                </h4>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card_img">
-                <img src="https://picsum.photos/id/233/1920/1080" alt="">
-            </div>
-            <div class="card_title">
-                <h4>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, vitae?
-                </h4>
+                <!-- Clock -->
+                <div class="clock" id="clock-display">
+                    <div class="clock-time">00:00:00</div>
+                    <div class="clock-date">Mon, 1 Jan</div>
+                </div>
+
+                <div id="search-trigger" style="cursor: pointer; color: white;">
+                    <i class="fas fa-search"></i>
+                </div>
+                <button class="menu-toggle" aria-label="Open Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
-        <div class="card">
-            <div class="card_img">
-                <img src="https://picsum.photos/id/231/1920/1080" alt="">
-            </div>
-            <div class="card_title">
-                <h4>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae et exercitationem iste error magni illo iure consequuntur eveniet.
-                </h4>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card_img">
-                <img src="https://picsum.photos/id/134/1920/1080" alt="">
-            </div>
-            <div class="card_title">
-                <h4>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat aliquam ipsum ducimus.
-                </h4>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card_img">
-                <img src="https://picsum.photos/id/524/1920/1080" alt="">
-            </div>
-            <div class="card_title">
-                <h4>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat aliquam ipsum ducimus.
-                </h4>
-            </div>
-        </div>
-        <div class="card more">
-            <label for="">More >>></label>
+    </header>
+
+    <!-- Marquee -->
+    <div class="news-ticker-wrap">
+        <div class="ticker-label">Latest</div>
+        <div class="ticker-content" id="marquee-content">
+            <!-- Dynamic ticker items -->
+            <span class="ticker-item">Welcome to Gour Bongo TV... Loading latest updates...</span>
         </div>
     </div>
-    <!-- LOWER BLOCKS STYLE -->
-    <style>
-        .more{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #e81111;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2em;
-            border-radius: 10px;
-        }
-        .group_title{
-            width: 100%;
-            color: white;
-            text-align: center;
-            font-size: 1.2em;
-            font-weight: bold;
-            background-color: #0004f6;
-            padding: 5px;
-        }
-        .main_wrapper{
-            width: 100vw;
-            display: grid;
-            flex-direction: column;
-            justify-content: center;
-            min-width: 320px;
-        }
-        .card {
-            display: flex;
-            flex-direction: column;
-            max-width: 400px;
-            margin-left: 10px;
-            margin-right: 10px;
-            margin-top: 10px;
-            border: 1px solid #e81111;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .card_img {
-            width: 100%;
-            height: 0;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            background-size: cover;
-            background-position: center;
-        }
-        .card_img img{
-            width: 100%;
-        }
-        .card_title {
-            padding: 5px;
-            text-align: center;
-            font-size: 1.2em;
-            font-weight: bold;
-            background-color: #efff09e0;
-            height: 100%;
-        }
-        .title{
-            font-size: 16px;
-            max-width: 100%;
-            max-height: 100%;
-        }
-        .container {
-            width: 100%; 
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-    </style>
-        <!-- MAIN STYLE -->
-    <style>
-        /* MAIN BODY DESIGN */
-        .main_cont{
-            margin-top: 5px;
-        }
-        .main_title{
-            width: 100%;
-            margin-left: 18px;
-            height: 20%;
-            position: relative; 
-        }
-        .main_title h1 {
-            font-size: 28px;
-            font-weight: bolder;
-            letter-spacing: 0;
-            line-height: 1em;
-            padding-bottom: 15px;
-            position: relative;
-            }
-        .main_title h1:before {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            height: 6px;
-            width: 60px;
-            background-color: #111;
-            }
-        .main_title h1:after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: 2px;
-            height: 2px;
-            width: 95%;
-            max-width: 255px;
-            background-color: #333;
-            }
 
-       
-        /* Total Body */
-        body{
-            margin-left: 0px;
-            margin-right: 0px;
-            padding: 0;
-            min-width: 320px;
-            overflow-x: hidden;
-            overflow-y: scroll;
-        }
-        body::-webkit-scrollbar{ 
-            width: 1px; 
-        }
-        a{
-            text-decoration: none;        
-            color: inherit;
-        }
-        .header{
-            display: flex;
-            margin-top: 5px;
-        } 
-        #logo{
-            height: 100px;
-            margin-top: -5px;
-            margin-bottom: 5px;
-        }
-        #head_label{
-            width: 100%;
-            text-align: center;
-            max-height: 90px;
-        }
-        .dtbar{
-            width: 100%;
-            height: 20%;      
-            border-radius: 5px;
-            background-color: gray;
-        }
-        .hlbl{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 80%;
-        }
-        #hlb{
-            font-size: clamp(23px, 7vw, 43px);
-            color: rgb(0, 15, 230);  
-            font-weight: bolder;      
-        }     
-        .social{
-            width: 120px;
-            margin-top: auto;
-            margin-bottom: auto;
-        }
-        .soc{
-            width: 80px;
-        }
-        #tvimg{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        #tv{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-        #day{
-            font-size: 15px;
-            float: left;
-            padding-left: 10px;
-            color: white; 
-        }
-        #date{
-            font-size: 15px;
-            float: left;
-            padding-left: 10px;
-            color: white;
-        }
-        #time{
-            font-size: 15px;
-            float: right;
-            padding-right: 10px;
-            color: white;
-        }
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav">
+        <button class="close-menu">&times;</button>
 
-        /* Navigation 2nd Blocks */
-        .navigations {
-            min-width: 320px;
-            width: 100vw;
-            background-color: rgb(0, 15, 230);
-            height: 40px;
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000; /* Ensure it stays above other content */
-    }
-        .mainnav{
-            height: 32px;
-            width: 100%;
-            border-radius: 5px;
-            background-color: rgb(250, 250, 249); 
-            overflow: hidden;
-            display: flex;
-        }
-       
-        .search{
-            margin-left: auto;
-            margin-top: auto;
-            margin-bottom: auto;
-        } 
-        #search{
-            height: 30px;
-            margin-right: 15px;
-            margin-left: 15px;
-        }
-        .menu{
-            display: flex;
-            justify-content: left;
-        } 
-        #menu{
-            height: 70px;
-            margin-left: 0px;
-        }
-        .mainnav ul{
-            height: 32px;
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            display: flex;
-            overflow: hidden;
-            align-items: center;
-            justify-content: center;
-        }
-        .mainnav li{ 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bolder;
-            text-align: center;
-            height: 32px;
-            padding-right: 7px;
-            padding-left: 7px;
-            color: blue;
-        }
-        .mainnav li:hover{
-            border-bottom: 6px solid rgb(5, 186, 17);
-            color: rgb(5, 186, 17) ;
-            }
+        <ul>
+            <li><a href="#" data-cat="all" onclick="closeMobileMenu()">Home</a></li>
+            <li><a href="#" data-cat="Nodiya" onclick="closeMobileMenu()">নদীয়া</a></li>
+            <li><a href="#" data-cat="Rajya" onclick="closeMobileMenu()">রাজ্য</a></li>
+            <li><a href="#" data-cat="Desh" onclick="closeMobileMenu()">দেশ</a></li>
+            <li><a href="#" data-cat="Biswa" onclick="closeMobileMenu()">বিশ্ব</a></li>
+            <li><a href="#" data-cat="Khela" onclick="closeMobileMenu()">খেলা</a></li>
+            <li><a href="#" data-cat="Binodon" onclick="closeMobileMenu()">বিনোদন</a></li>
+            <li><a href="#" data-cat="Swasthya" onclick="closeMobileMenu()">স্বাস্থ্য</a></li>
+            <li><a href="#" data-cat="Projukti" onclick="closeMobileMenu()">প্রযুক্তি</a></li>
+            <li><a href="#" data-cat="about" onclick="closeMobileMenu()">About Us</a></li>
+            <li><a href="#" data-cat="contact" onclick="closeMobileMenu()">Contact</a></li>
+        </ul>
+    </div>
 
-        /* ALL MEDIAS */
-        @media screen and (max-width: 420px){
-            #day{
-                display: none;
-            } 
-            #time{
-                display: none;
-            }
-            .dtbar {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-        }
-        @media screen and (max-width: 572px){
-            .hli{
-                display: none;
-            } 
-            .mainnav ul{
-                margin-left: auto;
-                margin-right: auto;
-            }
-            
-            
-            #adjust_head{
-                display: none;
-            }
-           
-        }
-        @media screen and (max-width: 380px){
-            #hidden_li{
-                display: none;
-            }
-        }
-        @media screen and (min-width: 572px){
-            #hidden_li{
-                display: none;
-            }
-            .title{
-                padding: 5px;
-            }
-            .card_title{
-                background-color: #e81111;
-            }
-            .main_wrapper{
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-        }
+    <!-- Main Content -->
+    <main class="container">
 
-        /* Latest News Maquee */
-        .marq{
-            padding-top: 5px;
-            display: flex;
-            top: 40px; /* Adjust based on the height of the .navigations */
-            z-index: 999; /* Ensure it stays above other content */
-            background-color: white;
-            border-bottom: 3px solid black;
-        }
-        #ln{ 
-            margin-left: 10px;
-            color: red;
-            font-weight: bolder;
-            white-space: nowrap;
-            padding-right: 5px;
-        }
-        #lnm{
-            display: inline;
-            color: blue;
-            font-weight: bolder;
-            height: 20px;
-            margin-right: 10px;
-        }
+        <!-- HOME VIEW -->
+        <div id="home-view">
+            <!-- Hero Section: Latest from Each Category -->
+            <section class="hero-section" id="hero-section">
+                <div class="hero-slider" id="hero-slider">
+                    <!-- Skeletons... -->
+                    <div class="hero-card loading-skeleton" style="flex: 0 0 45%; height: 100%;"></div>
+                    <div class="hero-card loading-skeleton" style="flex: 0 0 45%; height: 100%;"></div>
+                </div>
+            </section>
 
-        /* MAIN BODY */
+            <!-- Category Grids -->
+            <div id="content-area">
+                <!-- Dynamic sections inserted here -->
+                <div class="loading-skeleton" style="height: 300px; width: 100%; border-radius: 16px;"></div>
+            </div>
+        </div>
 
-        .body{
-            margin-right: 10px;
-            padding: 0;
-        }
-        .sidebar{
-            margin-left: -40vw;
-            width: 40vw;
-            height: 100%;
-            background-color: blue;
-            padding: 0;
-            overflow: scroll;
-            border-top-right-radius: 15px;
-            border-bottom-right-radius: 15px;
-            transition: 0.3s;
-            position: absolute;
-            z-index: 1001;
-        }
+        <!-- ABOUT VIEW -->
+        <div id="about-view" class="hidden">
+            <div class="about-container">
+                <img src="https://via.placeholder.com/1200x500" alt="About GBTV" class="about-hero">
+                <div class="about-content">
+                    <h2>About Gour Bongo TV</h2>
+                    <p>Welcome to Gour Bongo TV, your trusted source for the latest news and updates. We are dedicated
+                        to providing accurate and timely information on local, national, and international events.</p>
+                    <p>Our mission is to empower our viewers with knowledge and foster a well-informed community.</p>
 
-        /* SCROLLBAR  */
-        .sidebar::-webkit-scrollbar {
-            width: 3px; /* Very little width */
-        }
-        .sidebar::-webkit-scrollbar-track {
-            background-color: blue;
-        }
-        .sidebar::-webkit-scrollbar-thumb {
-            background-color: rgb(255, 255, 255); /* Semi-transparent thumb */
-        } 
-        .sidebar {
-            scrollbar-width: thin; /* For Firefox */
-            scrollbar-color: rgb(255, 255, 255) rgb(14, 10, 246); /* For Firefox */
-        }
-        /* SCROLLBAR END  */
+                    <div class="about-address card-like">
+                        <h3>Our Office</h3>
+                        <p>123 News Street, Krishnanagar,<br>Nadia, West Bengal, 741101</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        .sidebar ul{
-            padding: 0;
-            list-style-type: none;
-            padding-top: 10px;
-            margin: 0;
-        }
-        .sidebar li{
-            text-align: center;
-            border-bottom: 3px solid white;
-            padding: 5px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            font-size: 18px;
-            color: white;
-            font-weight: bolder;
-        }
-    </style>
+        <!-- CONTACT VIEW -->
+        <div id="contact-view" class="hidden">
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h2>Contact Us</h2>
+                    <p>Get in touch with us for news tips, advertising, or inquiries.</p>
 
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Visit Us</h4>
+                                <p>123 News Street, Krishnanagar, Nadia, WB</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div>
+                                <h4>Call Us</h4>
+                                <p>+91 98765 43210</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email Us</h4>
+                                <p>contact@gourbongotv.com</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Embedded Map -->
+                    <div class="map-container">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117565.41961601675!2d88.4239851125299!3d23.3999812921501!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f8e010839a8c17%3A0x677b064c24479e01!2sKrishnanagar%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1650000000000!5m2!1sen!2sin"
+                            width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+
+                <div class="contact-form-section">
+                    <h3>Send a Message</h3>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Email Address">
+                        </div>
+                        <div class="form-group">
+                            <textarea rows="5" placeholder="Message or News Tip..."></textarea>
+                        </div>
+                        <button type="button" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- ARTICLE DETAIL VIEW -->
+        <div id="article-view" class="hidden">
+            <!-- Dynamic Content -->
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <img src="logo.png" alt="GBTV" style="height: 60px; filter: grayscale(1); opacity: 0.7;">
+
+            <div class="social-links">
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.youtube.com/@gourbongotv" target="_blank" class="social-icon"><i
+                        class="fab fa-youtube"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            </div>
+
+            <p style="color: var(--text-muted); font-size: 0.9rem;">&copy; 2026 Gour Bongo TV. All rights reserved. <br>
+                Built with <span style="color: #e25555;">&#10084;</span> by <a href="https://dgofficial.dpdns.org/"
+                    target="_blank"><b><u>Debanshu Ghosh.</u></a></p>
+        </div>
+    </footer>
+
+    <!-- App Logic -->
+    <script src="app.js"></script>
     <script>
-        //YT visit function
-        function visityt(){
-            window.open("https://www.youtube.com/@gourbongotv", "_blank");
-        }
-        // Function to update the time every second
-        function updateTime() {
-            var now = new Date();
-            var hours = now.getHours();
-            var minutes = now.getMinutes();
-            var seconds = now.getSeconds();
-            var ampm = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12;
-            hours = hours ? hours : 12; // the hour '0' should be '12'
-            minutes = minutes < 10 ? '0' + minutes : minutes;
-            seconds = seconds < 10 ? '0' + seconds : seconds;
-            var timeString = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
-            document.getElementById('time').innerHTML = timeString;
-        }
-        // Initial call to display the time immediately
-        updateTime();
-        // Update the time every second
-        setInterval(updateTime, 1000);
-        var today = new Date();
-        var day = today.getDay();
-        var date = today.getDate();
-        var month = today.getMonth();
-        var year = today.getFullYear();
-        var daylist = ["Sunday", "Monday", "Tuesday", "Wednesday ", "Thursday", "Friday", "Saturday"];
-        var monthlist = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        // Display the current date and time
-        document.getElementById('day').innerHTML = daylist[day];
-        document.getElementById('date').innerHTML = date + " " + monthlist[month] + " " + year;        
-        function slider(){
-            if (document.querySelector('.sidebar').style.marginLeft == "0px"){
-                document.querySelector('.sidebar').style.marginLeft = "-40vw";
-            } else {
-                document.querySelector('.sidebar').style.marginLeft = "0px";
-            }
-        }
-        </script>
-        <!-- LOWER AUTO HIDE WITHOUT FILL CONDITIONS -->
-        <!-- <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                document.querySelectorAll(".box").forEach(box => {
-                    let primary = box.querySelector(".primary");
-                    let secondary = box.querySelector(".secondary");
-                    
-                    if (!secondary.textContent.trim()) {
-                        primary.style.display = "none";
-                        secondary.style.display = "none";
-                        box.style.display = "none";
-                    }
-                });
-            });
-        </script> -->
+        // Mobile Menu Logic
+        const menuToggle = document.querySelector('.menu-toggle');
+        const closeBtn = document.querySelector('.close-menu');
+        const mobileNav = document.querySelector('.mobile-nav');
 
+        function openMobileMenu() {
+            mobileNav.classList.add('open');
+            document.body.classList.add('no-scroll');
+        }
+
+        function closeMobileMenu() {
+            mobileNav.classList.remove('open');
+            document.body.classList.remove('no-scroll');
+        }
+
+        menuToggle.addEventListener('click', openMobileMenu);
+        closeBtn.addEventListener('click', closeMobileMenu);
+    </script>
 </body>
+
 </html>
