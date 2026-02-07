@@ -452,41 +452,69 @@ function openArticle(item) {
 
     const isVideo = item.video_url && item.video_url.length > 5;
 
+    const sidebarHTML = renderLatestNewsSidebar(item.id);
+
     articleView.innerHTML = `
         <div class="article-view-container">
-            <button onclick="history.back()" class="back-btn" style="margin: 1rem 0 0 1rem; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+            <button onclick="history.back()" class="back-btn" style="margin: 1rem 0 1rem 1rem; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: 4px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
                 <i class="fas fa-arrow-left"></i> Back
             </button>
-            ${isVideo
+            
+            <div class="article-content-wrapper">
+                <div class="article-main">
+                    ${isVideo
             ? `<div style="position:relative; padding-top:56.25%;"><iframe src="${convertYoutube(item.video_url)}" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" allowfullscreen></iframe></div>`
             : `<img src="${item.image_url}" class="article-hero-img">`
         }
-            <div class="article-body">
-                <div class="article-header">
-                    <div class="article-cats">${item.category}</div>
-                    <h1 class="article-headline">${item.title}</h1>
-                    <div class="article-meta">
-                        <span class="article-author">
-                            ${item.reporter || 'GBTV Desk'}
-                        </span>
-                        <span><i class="far fa-clock"></i> ${getRelativeTime(item.dateObj)}</span>
-                        <button onclick="shareArticle('${item.id}', '${item.title.replace(/'/g, "\\'")}')" class="share-btn" style="background: rgba(255,255,255,0.1); border: none; color: white; padding: 4px 10px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 6px; font-size: 0.85rem; margin-left: auto;">
-                            <i class="fas fa-share-alt"></i> Share
-                        </button>
+                    <div class="article-body">
+                        <div class="article-header">
+                            <div class="article-cats">${item.category}</div>
+                            <h1 class="article-headline">${item.title}</h1>
+                            <div class="article-meta">
+                                <span class="article-author">
+                                    ${item.reporter || 'GBTV Desk'}
+                                </span>
+                                <span><i class="far fa-clock"></i> ${getRelativeTime(item.dateObj)}</span>
+                                <button onclick="shareArticle('${item.id}', '${item.title.replace(/'/g, "\\'")}')" class="share-btn" style="background: rgba(255,255,255,0.1); border: none; color: white; padding: 4px 10px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 6px; font-size: 0.85rem; margin-left: auto;">
+                                    <i class="fas fa-share-alt"></i> Share
+                                </button>
+                            </div>
+                        </div>
+                        <div class="article-text">
+                            ${formatContent(item.content)}
+                        </div>
+                        
                     </div>
                 </div>
-                <div class="article-text">
-                    ${formatContent(item.content)}
+
+                <div class="article-sidebar">
+                    <h3 class="sidebar-title">Latest News</h3>
+                    <div class="sidebar-news-list">
+                        ${sidebarHTML}
+                    </div>
                 </div>
-                
-                <div class="article-actions" style="margin-top: 3rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
-                    <button onclick="goBackToHome()" class="load-more-btn" style="font-size: 1rem; padding: 12px 30px;">
-                        <i class="fas fa-home"></i> Back to Home
-                    </button>
-                </div>
+            </div>
+            
+            <div class="article-actions" style="margin: 3rem 2rem 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
+                <button onclick="goBackToHome()" class="load-more-btn" style="font-size: 1rem; padding: 12px 30px;">
+                    <i class="fas fa-home"></i> Back to Home
+                </button>
             </div>
         </div>
     `;
+}
+
+function renderLatestNewsSidebar(currentId) {
+    const latest = allNews.filter(n => n.id !== currentId).sort((a, b) => b.dateObj - a.dateObj).slice(0, 5);
+    return latest.map(item => `
+        <div class="sidebar-card" onclick="openArticleByID('${item.id}')">
+            <img src="${item.image_url || 'https://via.placeholder.com/100'}" alt="${item.title}">
+            <div class="sidebar-card-content">
+                <h4>${item.title}</h4>
+                <span><i class="far fa-clock"></i> ${getRelativeTime(item.dateObj)}</span>
+            </div>
+        </div>
+    `).join('');
 }
 
 function convertYoutube(url) {
