@@ -23,6 +23,7 @@ const marqueeContent = document.getElementById('marquee-content');
 const homeView = document.getElementById('home-view');
 const contactView = document.getElementById('contact-view');
 const articleView = document.getElementById('article-view');
+const liveTvSection = document.querySelector('.live-tv-section-start');
 
 // --- INIT ---
 document.addEventListener('DOMContentLoaded', () => {
@@ -146,7 +147,8 @@ function setupNavigation() {
             // Update Nav Highlighting
             setActiveNav(cat);
 
-
+            // Hide Live TV by default, show only on Home/Category views
+            liveTvSection.classList.add('hidden');
 
             // Handle Views
             if (cat === 'contact') {
@@ -155,6 +157,7 @@ function setupNavigation() {
                 document.getElementById('about-view').classList.remove('hidden');
             } else {
                 homeView.classList.remove('hidden');
+                liveTvSection.classList.remove('hidden');
                 currentCategory = cat;
 
                 if (cat === 'all') {
@@ -199,7 +202,9 @@ window.goBackToHome = function () {
     articleView.classList.add('hidden');
     contactView.classList.add('hidden');
     document.getElementById('about-view').classList.add('hidden');
+    document.getElementById('about-view').classList.add('hidden');
     homeView.classList.remove('hidden');
+    liveTvSection.classList.remove('hidden');
     window.scrollTo(0, 0); // Optional: preserve scroll pos if possible? Simple scroll top is okay.
 }
 
@@ -380,6 +385,7 @@ function openArticle(item) {
     homeView.classList.add('hidden');
     contactView.classList.add('hidden');
     document.getElementById('about-view').classList.add('hidden');
+    liveTvSection.classList.add('hidden');
     articleView.classList.remove('hidden');
     window.scrollTo(0, 0);
 
@@ -403,13 +409,22 @@ function openArticle(item) {
                     <h1 class="article-headline">${item.title}</h1>
                     <div class="article-meta">
                         <span class="article-author">
-                            ${item.author || 'GBTV Desk'}
+                            ${item.reporter || 'GBTV Desk'}
                         </span>
                         <span><i class="far fa-clock"></i> ${getRelativeTime(item.dateObj)}</span>
+                        <button onclick="shareArticle('${item.id}', '${item.title.replace(/'/g, "\\'")}')" class="share-btn" style="background: rgba(255,255,255,0.1); border: none; color: white; padding: 4px 10px; border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 6px; font-size: 0.85rem; margin-left: auto;">
+                            <i class="fas fa-share-alt"></i> Share
+                        </button>
                     </div>
                 </div>
                 <div class="article-text">
                     ${formatContent(item.content)}
+                </div>
+                
+                <div class="article-actions" style="margin-top: 3rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
+                    <button onclick="goBackToHome()" class="load-more-btn" style="font-size: 1rem; padding: 12px 30px;">
+                        <i class="fas fa-home"></i> Back to Home
+                    </button>
                 </div>
             </div>
         </div>
@@ -453,6 +468,7 @@ window.openCategory = function (cat) {
     setActiveNav(cat);
 
     homeView.classList.remove('hidden');
+    liveTvSection.classList.remove('hidden');
     currentCategory = cat;
 
     if (cat === 'all') {
@@ -464,4 +480,22 @@ window.openCategory = function (cat) {
         renderContent(filtered, cat);
     }
     window.scrollTo(0, 0);
+}
+
+window.shareArticle = function (id, title) {
+    const url = window.location.href.split('#')[0] + '#article-' + id;
+    if (navigator.share) {
+        navigator.share({
+            title: title + ' | Gour Bongo TV',
+            text: 'Check out this news on Gour Bongo TV!',
+            url: url
+        }).catch(err => console.log('Error sharing:', err));
+    } else {
+        // Fallback: Copy to clipboard
+        navigator.clipboard.writeText(url).then(() => {
+            alert('Link copied to clipboard!');
+        }).catch(() => {
+            prompt('Copy this link:', url);
+        });
+    }
 }

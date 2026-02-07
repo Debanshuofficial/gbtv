@@ -8,7 +8,6 @@ https.get(url, (resp) => {
     resp.on('data', (chunk) => {
         data += chunk;
     });
-
     resp.on('end', () => {
         const lines = data.split('\n');
         console.log('Headers:', lines[0]);
