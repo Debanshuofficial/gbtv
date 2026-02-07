@@ -1012,3 +1012,82 @@ footer {
     line-height: 1.4;
     text-transform: uppercase;
 }
+
+/* --- Live TV Section --- */
+.live-tv-section-start {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.live-tv-container {
+    background: var(--bg-card);
+    border: var(--border-glass);
+    border-radius: var(--radius-lg);
+    padding: 0.8rem;
+    box-shadow: var(--shadow-glow);
+    animation: fadeIn 0.5s ease-out;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.live-window-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.8rem;
+}
+
+.live-indicator {
+    background: #e11d48;
+    color: white;
+    font-weight: 800;
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 10px rgba(225, 29, 72, 0.4);
+}
+
+.blink-dot {
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    animation: blinker 1.5s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+.live-window-header h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.video-responsive {
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    /* 16:9 Aspect Ratio */
+    position: relative;
+    height: 0;
+    border-radius: var(--radius-md);
+    background: black;
+}
+
+.video-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
