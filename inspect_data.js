@@ -1,6 +1,6 @@
 const https = require('https');
 
-const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTK5WZPJD05FoMonO805j9HIUeBuHQWzdHDrtnHo5EE4bjya6aYCw2yI2B-1hitcxXs3X0VvykFLcoS/pub?output=csv';
+const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSBEEdaawV_WYCyebwSebB-n4eOWPMs2LQgPO8ncdOPh4dejAcNz0XGTqJlhBX1Qx2hB_3aXDJ4S4Yo/pub?gid=0&single=true&output=csv';
 
 https.get(url, (resp) => {
     let data = '';

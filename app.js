@@ -4,12 +4,31 @@
  */
 
 // CONFIGURATION
-const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTK5WZPJD05FoMonO805j9HIUeBuHQWzdHDrtnHo5EE4bjya6aYCw2yI2B-1hitcxXs3X0VvykFLcoS/pub?output=csv';
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSBEEdaawV_WYCyebwSebB-n4eOWPMs2LQgPO8ncdOPh4dejAcNz0XGTqJlhBX1Qx2hB_3aXDJ4S4Yo/pub?gid=0&single=true&output=csv';
 
 const CATEGORIES = [
     'নদীয়া', 'রাজ্য', 'দেশ', 'বিশ্ব',
     'খেলা', 'বিনোদন', 'স্বাস্থ্য', 'প্রযুক্তি'
 ];
+
+const CATEGORY_MAPPING = {
+    'all': 'all',
+    'nodiya': 'নদীয়া',
+    'rajya': 'রাজ্য',
+    'desh': 'দেশ',
+    'biswa': 'বিশ্ব',
+    'khela': 'খেলা',
+    'binodon': 'বিনোদন',
+    'swasthya': 'স্বাস্থ্য',
+    'projukti': 'প্রযুক্তি',
+    'about': 'about',
+    'contact': 'contact'
+};
+
+// Reverse mapping helper
+function getCategoryKey(bengaliName) {
+    return Object.keys(CATEGORY_MAPPING).find(key => CATEGORY_MAPPING[key] === bengaliName) || bengaliName;
+}
 
 // STATE
 let allNews = [];
@@ -60,21 +79,57 @@ async function fetchSheetData(url) {
     return parseCSV(text);
 }
 
-function parseCSV(csvText) {
-    const lines = csvText.split('\n');
-    const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
+function parseCSV(text) {
+    const rows = [];
+    let currentRow = [];
+    let currentVal = '';
+    let insideQuote = false;
+
+    // Normalize line endings to \n
+    const cleanText = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+    for (let i = 0; i < cleanText.length; i++) {
+        const char = cleanText[i];
+        const nextChar = cleanText[i + 1];
+
+        if (char === '"') {
+            if (insideQuote && nextChar === '"') {
+                currentVal += '"';
+                i++; // Skip next quote
+            } else {
+                insideQuote = !insideQuote;
+            }
+        } else if (char === ',' && !insideQuote) {
+            currentRow.push(currentVal);
+            currentVal = '';
+        } else if (char === '\n' && !insideQuote) {
+            currentRow.push(currentVal);
+            if (currentRow.length > 0) rows.push(currentRow);
+            currentRow = [];
+            currentVal = '';
+        } else {
+            currentVal += char;
+        }
+    }
+    // Push last row if exists
+    if (currentVal || currentRow.length > 0) {
+        currentRow.push(currentVal);
+        rows.push(currentRow);
+    }
+
+    if (rows.length === 0) return [];
+
+    // Extract Headers
+    const headers = rows[0].map(h => h.trim().toLowerCase());
     const data = [];
 
-    for (let i = 1; i < lines.length; i++) {
-        const currentline = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-        if (currentline.length < 2) continue;
+    for (let i = 1; i < rows.length; i++) {
+        const currentline = rows[i];
+        if (currentline.length < 2) continue; // Skip empty rows
 
         const obj = {};
         headers.forEach((header, j) => {
             let val = currentline[j] ? currentline[j].trim() : '';
-            if (val.startsWith('"') && val.endsWith('"')) {
-                val = val.substring(1, val.length - 1);
-            }
             obj[header] = val;
         });
 
@@ -158,15 +213,18 @@ function setupNavigation() {
             } else {
                 homeView.classList.remove('hidden');
                 liveTvSection.classList.remove('hidden');
-                currentCategory = cat;
+
+                // Use mapped Bengali name for data filtering
+                const dataCat = CATEGORY_MAPPING[cat.toLowerCase()] || cat;
+                currentCategory = dataCat;
 
                 if (cat === 'all') {
                     document.getElementById('hero-section').classList.remove('hidden');
                     renderContent(allNews);
                 } else {
                     document.getElementById('hero-section').classList.add('hidden');
-                    const filtered = allNews.filter(n => n.category && n.category.toLowerCase() === cat.toLowerCase());
-                    renderContent(filtered, cat);
+                    const filtered = allNews.filter(n => n.category && n.category === dataCat);
+                    renderContent(filtered, dataCat);
                 }
             }
         });
@@ -457,27 +515,31 @@ function createViewAllCard(category) {
     `;
 }
 
-window.openCategory = function (cat) {
+window.openCategory = function (catInput) {
+    // catInput might be Bengali (from View All) or English key
+    let catKey = getCategoryKey(catInput); // Try to find English key
+    let dataCat = CATEGORY_MAPPING[catKey.toLowerCase()] || catInput; // Back to Bengali/Data name
+
     // Switch Views
     homeView.classList.add('hidden');
     contactView.classList.add('hidden');
     document.getElementById('about-view').classList.add('hidden');
     articleView.classList.add('hidden');
 
-    // Update Nav
-    setActiveNav(cat);
+    // Update Nav using English Key
+    setActiveNav(catKey);
 
     homeView.classList.remove('hidden');
     liveTvSection.classList.remove('hidden');
-    currentCategory = cat;
+    currentCategory = dataCat;
 
-    if (cat === 'all') {
+    if (catKey === 'all') {
         document.getElementById('hero-section').classList.remove('hidden');
         renderContent(allNews);
     } else {
         document.getElementById('hero-section').classList.add('hidden');
-        const filtered = allNews.filter(n => n.category && n.category.toLowerCase() === cat.toLowerCase());
-        renderContent(filtered, cat);
+        const filtered = allNews.filter(n => n.category && n.category === dataCat);
+        renderContent(filtered, dataCat);
     }
     window.scrollTo(0, 0);
 }
